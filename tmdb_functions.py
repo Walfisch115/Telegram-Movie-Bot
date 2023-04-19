@@ -32,13 +32,6 @@ def get_movie_poster(movie_id, language="de", size="original"):
     get_poster = f"/movie/{movie_id}/images"
     response = requests.get(f"{base_url}{get_poster}{api_part}&language={language}")
     data = response.json()
-    poster_path = data["posters"][0]["file_path"]  # change number for other posters
+    poster_path = data["posters"][0]["file_path"]  # returns path for first poster
 
     return f"https://image.tmdb.org/t/p/{size}{poster_path}"
-
-
-# print(search_for_movies("john wick", "de"))
-# print(get_movie_by_id(245891))
-# print(get_movie_poster(120, "de"))
-# movie = search_for_movies("john wick")
-# print(movie["results"][0]["id"])
