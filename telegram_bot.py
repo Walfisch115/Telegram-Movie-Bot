@@ -82,53 +82,71 @@ if __name__ == '__main__':
                             elif message.startswith("/movie"):
 
                                 query = message[7:]
-                                movie_search = tmdb.search_for_movies(query)
-                                movie_id = movie_search["results"][0]["id"]
 
-                                movie = tmdb.get_movie_by_id(movie_id)
-                                title = movie["title"]
-                                genre_list = []
-                                for x in movie["genres"]:
-                                    genre_list.append(x["name"])
-                                genre = ", ".join(genre_list)
-                                release = convert_release_date(movie["release_date"])
-                                runtime = movie["runtime"]
-                                rating = round(movie["vote_average"], 1)
+                                try:
+                                    movie_search = tmdb.search_for_movies(query)
+                                    movie_id = movie_search["results"][0]["id"]
 
-                                print("/movie request")
+                                except IndexError:
+                                    send_message(chat_id, "Film nicht gefunden.")
 
-                                send_message(chat_id, f"{title}"
-                                                      f"\nGenre: {genre}"
-                                                      f"\nLaufzeit: {runtime} Minuten"
-                                                      f"\nBewertung: {rating}/10"
-                                                      f"\nKinostart: {release}")
+                                else:
+                                    movie = tmdb.get_movie_by_id(movie_id)
+                                    title = movie["title"]
+                                    genre_list = []
+                                    for x in movie["genres"]:
+                                        genre_list.append(x["name"])
+                                    genre = ", ".join(genre_list)
+                                    release = convert_release_date(movie["release_date"])
+                                    runtime = movie["runtime"]
+                                    rating = round(movie["vote_average"], 1)
+
+                                    print("/movie request")
+
+                                    send_message(chat_id, f"{title}"
+                                                          f"\nGenre: {genre}"
+                                                          f"\nLaufzeit: {runtime} Minuten"
+                                                          f"\nBewertung: {rating}/10"
+                                                          f"\nKinostart: {release}")
 
                             elif message.startswith("/poster"):
 
                                 query = message[8:]
-                                movie_search = tmdb.search_for_movies(query)
-                                movie_id = movie_search["results"][0]["id"]
 
-                                movie = tmdb.get_movie_by_id(movie_id)
-                                title = movie["title"]
-                                poster_url = tmdb.get_movie_poster(movie_id)
+                                try:
+                                    movie_search = tmdb.search_for_movies(query)
+                                    movie_id = movie_search["results"][0]["id"]
 
-                                print("/poster request")
+                                except IndexError:
+                                    send_message(chat_id, "Film nicht gefunden.")
 
-                                send_photo(chat_id, title, poster_url)
+                                else:
+                                    movie = tmdb.get_movie_by_id(movie_id)
+                                    title = movie["title"]
+                                    poster_url = tmdb.get_movie_poster(movie_id)
+
+                                    print("/poster request")
+
+                                    send_photo(chat_id, title, poster_url)
 
                             elif message.startswith("/description"):
 
                                 query = message[13:]
-                                movie_search = tmdb.search_for_movies(query)
-                                movie_id = movie_search["results"][0]["id"]
 
-                                movie = tmdb.get_movie_by_id(movie_id)
-                                description = movie["overview"]
+                                try:
+                                    movie_search = tmdb.search_for_movies(query)
+                                    movie_id = movie_search["results"][0]["id"]
 
-                                print("/description request")
+                                except IndexError:
+                                    send_message(chat_id, "Film nicht gefunden.")
 
-                                send_message(chat_id, f"{description}")
+                                else:
+                                    movie = tmdb.get_movie_by_id(movie_id)
+                                    description = movie["overview"]
+
+                                    print("/description request")
+
+                                    send_message(chat_id, f"{description}")
 
                             else:
                                 send_message(chat_id, f"Please /start, {first_name}".encode("utf8"))
