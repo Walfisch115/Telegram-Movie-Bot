@@ -6,6 +6,6 @@ Pull Based Telegram Bot, der mithilfe der [The Movie Database](https://www.themo
 * /poster [movie name]
 * /description [movie name]
 
-<img src="/img/bild2.PNG" height="150" alt="/movie command">
-<img src="/img/bild1.PNG" height="500" alt="/poster command">
-<img src="/img/bild3.PNG" height="350" alt="/pdescription command">
+<img src="/img/bild2.PNG" width="500" alt="/movie command">
+<img src="/img/bild1.PNG" width="500" alt="/poster command">
+<img src="/img/bild3.PNG" width="500" alt="/pdescription command">
